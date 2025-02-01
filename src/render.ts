@@ -1,4 +1,4 @@
-import { createImageHandler } from './NotionImageHandler';
+import { createImageHandler } from './NotionImageHandler.js';
 import type {
   HtmlElementNode,
   ListNode,
@@ -198,7 +198,7 @@ export class NotionPageRenderer {
       );
     }
 
-    createImageHandler(client).then(handler => {
+    createImageHandler(client).then((handler: Awaited<ReturnType<typeof createImageHandler>>) => {
       this.#imageHandler = handler;
     });
   }

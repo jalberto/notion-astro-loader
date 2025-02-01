@@ -28,15 +28,18 @@ class NotionImageHandler {
       // Extract bucket and region from hostname
       // Format: prod-files-secure.s3.us-west-2.amazonaws.com
       const hostParts = urlObj.hostname.split('.');
+      if (hostParts.length < 4) return null;
+      
       const region = hostParts[2];
       const bucket = hostParts[0];
+      if (!region || !bucket) return null;
 
       // Remove leading slash from pathname to get key
       const key = urlObj.pathname.substring(1);
 
       return {
-        bucket,
-        region,
+        bucket: bucket,
+        region: region,
         key,
         originalUrl: url
       };
@@ -91,15 +94,6 @@ class NotionImageHandler {
     return imageUrl;
   }
 
-  // Helper method to clear expired cache entries
-  private cleanCache(): void {
-    const now = Date.now();
-    for (const [key, value] of this.cache.entries()) {
-      if (value.expires <= now) {
-        this.cache.delete(key);
-      }
-    }
-  }
 }
 
 export async function createImageHandler(client: Client): Promise<NotionImageHandler> {
