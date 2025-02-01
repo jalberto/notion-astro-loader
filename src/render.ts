@@ -1,3 +1,4 @@
+import { createImageHandler } from './NotionImageHandler';
 import type {
   HtmlElementNode,
   ListNode,
@@ -172,6 +173,7 @@ export interface RenderedNotionEntry {
 export class NotionPageRenderer {
   #imagePaths: string[] = [];
   #logger: AstroIntegrationLogger;
+  #imageHandler: Awaited<ReturnType<typeof createImageHandler>>;
 
   /**
    * @param client Notion API client.
@@ -195,6 +197,10 @@ export class NotionPageRenderer {
         `Failed to parse property Name as title: ${pageTitle.error.toString()}`,
       );
     }
+
+    createImageHandler(client).then(handler => {
+      this.#imageHandler = handler;
+    });
   }
 
   /**
@@ -254,16 +260,23 @@ export class NotionPageRenderer {
    */
   #fetchImage = async (imageFileObject: FileObject) => {
     try {
-      const fetchedImageData = await fileToImageAsset(imageFileObject);
+      // Use the new image handler
+      const url = await this.#imageHandler.getImageUrl(imageFileObject);
+      
+      const fetchedImageData = await fileToImageAsset({
+        ...imageFileObject,
+        [imageFileObject.type]: url
+      });
+      
       this.#imagePaths.push(fetchedImageData.src);
       return fetchedImageData.src;
     } catch (error) {
       this.#logger.error(
         `Failed to fetch image when rendering page.
 Have you added \`image: { remotePatterns: [{ protocol: "https", hostname: "*.amazonaws.com" }] }\` to your Astro config file?\n
-Error: ${getErrorMessage(error)}`,
+Error: ${getErrorMessage(error)}`
       );
-      // Fall back to using the remote URL directly.
+      // Fall back to using the remote URL directly
       return fileToUrl(imageFileObject);
     }
   };
