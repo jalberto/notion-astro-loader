@@ -1,3 +1,4 @@
+import { createImageHandler } from './NotionImageHandler.js';
 import { toc as rehypeToc } from "@jsdevtools/rehype-toc";
 import { iteratePaginatedAPI, isFullBlock, } from "@notionhq/client";
 import * as transformedPropertySchema from "./schemas/transformed-properties.js";
@@ -120,6 +121,7 @@ export class NotionPageRenderer {
     page;
     #imagePaths = [];
     #logger;
+    #imageHandler;
     /**
      * @param client Notion API client.
      * @param page Notion page object including page ID and properties. Does not include blocks.
@@ -134,6 +136,8 @@ export class NotionPageRenderer {
         if (!pageTitle.success) {
             this.#logger.warn(`Failed to parse property Name as title: ${pageTitle.error.toString()}`);
         }
+        // Initialize the image handler immediately
+        this.#initImageHandler(client);
     }
     /**
      * Return page properties for Astro to use.
@@ -183,9 +187,17 @@ export class NotionPageRenderer {
      * @param imageFileObject Notion file object representing an image.
      * @returns Local path to the image, or undefined if the image could not be fetched.
      */
+    async #initImageHandler(client) {
+        this.#imageHandler = await createImageHandler(client);
+    }
     #fetchImage = async (imageFileObject) => {
         try {
-            const fetchedImageData = await fileToImageAsset(imageFileObject);
+            // Use the new image handler
+            const url = await this.#imageHandler.getImageUrl(imageFileObject);
+            const fetchedImageData = await fileToImageAsset({
+                ...imageFileObject,
+                [imageFileObject.type]: url
+            });
             this.#imagePaths.push(fetchedImageData.src);
             return fetchedImageData.src;
         }
@@ -193,7 +205,7 @@ export class NotionPageRenderer {
             this.#logger.error(`Failed to fetch image when rendering page.
 Have you added \`image: { remotePatterns: [{ protocol: "https", hostname: "*.amazonaws.com" }] }\` to your Astro config file?\n
 Error: ${getErrorMessage(error)}`);
-            // Fall back to using the remote URL directly.
+            // Fall back to using the remote URL directly
             return fileToUrl(imageFileObject);
         }
     };

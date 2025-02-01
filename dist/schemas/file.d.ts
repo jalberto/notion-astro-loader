@@ -12,17 +12,17 @@ export declare const filePropertyResponse: z.ZodObject<{
         expiry_time: string;
     }>;
 }, "strip", z.ZodTypeAny, {
-    type: "file";
     file: {
         url: string;
         expiry_time: string;
     };
+    type: "file";
 }, {
-    type: "file";
     file: {
         url: string;
         expiry_time: string;
     };
+    type: "file";
 }>;
 export declare const externalPropertyResponse: z.ZodObject<{
     type: z.ZodLiteral<"external">;

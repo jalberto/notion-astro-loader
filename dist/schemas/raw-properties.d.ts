@@ -224,18 +224,18 @@ export declare const files: z.ZodObject<{
     }, {
         name: z.ZodString;
     }>, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
         name: string;
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
         name: string;
     }>, z.ZodObject<z.objectUtil.extendShape<{
         type: z.ZodLiteral<"external">;
@@ -265,11 +265,11 @@ export declare const files: z.ZodObject<{
     type: "files";
     id: string;
     files: ({
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
         name: string;
     } | {
         type: "external";
@@ -282,11 +282,11 @@ export declare const files: z.ZodObject<{
     type: "files";
     id: string;
     files: ({
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
         name: string;
     } | {
         type: "external";

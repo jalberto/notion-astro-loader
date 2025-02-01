@@ -32,17 +32,17 @@ export declare const pageObjectSchema: z.ZodObject<{
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>, z.ZodObject<{
         type: z.ZodLiteral<"emoji">;
         emoji: z.ZodString;
@@ -85,17 +85,17 @@ export declare const pageObjectSchema: z.ZodObject<{
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>]>>;
     archived: z.ZodBoolean;
     in_trash: z.ZodBoolean;
@@ -138,11 +138,11 @@ export declare const pageObjectSchema: z.ZodObject<{
         }, z.ZodTypeAny, "passthrough">;
     };
     icon: {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     } | {
         type: "external";
         external: {
@@ -153,11 +153,11 @@ export declare const pageObjectSchema: z.ZodObject<{
         emoji: string;
     } | null;
     cover: {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     } | {
         type: "external";
         external: {
@@ -176,11 +176,11 @@ export declare const pageObjectSchema: z.ZodObject<{
         }, z.ZodTypeAny, "passthrough">;
     };
     icon: {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     } | {
         type: "external";
         external: {
@@ -191,11 +191,11 @@ export declare const pageObjectSchema: z.ZodObject<{
         emoji: string;
     } | null;
     cover: {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     } | {
         type: "external";
         external: {
@@ -251,17 +251,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>, z.ZodObject<{
         type: z.ZodLiteral<"emoji">;
         emoji: z.ZodString;
@@ -304,17 +304,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>]>>;
     archived: z.ZodBoolean;
     in_trash: z.ZodBoolean;
@@ -383,17 +383,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>, z.ZodObject<{
         type: z.ZodLiteral<"emoji">;
         emoji: z.ZodString;
@@ -436,17 +436,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>]>>;
     archived: z.ZodBoolean;
     in_trash: z.ZodBoolean;
@@ -515,17 +515,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>, z.ZodObject<{
         type: z.ZodLiteral<"emoji">;
         emoji: z.ZodString;
@@ -568,17 +568,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>]>>;
     archived: z.ZodBoolean;
     in_trash: z.ZodBoolean;
@@ -647,17 +647,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>, z.ZodObject<{
         type: z.ZodLiteral<"emoji">;
         emoji: z.ZodString;
@@ -700,17 +700,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>]>>;
     archived: z.ZodBoolean;
     in_trash: z.ZodBoolean;
@@ -779,17 +779,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>, z.ZodObject<{
         type: z.ZodLiteral<"emoji">;
         emoji: z.ZodString;
@@ -832,17 +832,17 @@ export declare function notionPageSchema<Schema extends z.ZodTypeAny>({ properti
             expiry_time: string;
         }>;
     }, "strip", z.ZodTypeAny, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }, {
-        type: "file";
         file: {
             url: string;
             expiry_time: string;
         };
+        type: "file";
     }>]>>;
     archived: z.ZodBoolean;
     in_trash: z.ZodBoolean;
