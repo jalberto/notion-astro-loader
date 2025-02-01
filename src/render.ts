@@ -173,7 +173,7 @@ export interface RenderedNotionEntry {
 export class NotionPageRenderer {
   #imagePaths: string[] = [];
   #logger: AstroIntegrationLogger;
-  #imageHandler: Awaited<ReturnType<typeof createImageHandler>>;
+  #imageHandler!: Awaited<ReturnType<typeof createImageHandler>>;
 
   /**
    * @param client Notion API client.
@@ -198,9 +198,8 @@ export class NotionPageRenderer {
       );
     }
 
-    createImageHandler(client).then((handler: Awaited<ReturnType<typeof createImageHandler>>) => {
-      this.#imageHandler = handler;
-    });
+    // Initialize the image handler immediately
+    this.#initImageHandler(client);
   }
 
   /**
@@ -258,6 +257,10 @@ export class NotionPageRenderer {
    * @param imageFileObject Notion file object representing an image.
    * @returns Local path to the image, or undefined if the image could not be fetched.
    */
+  async #initImageHandler(client: Client) {
+    this.#imageHandler = await createImageHandler(client);
+  }
+
   #fetchImage = async (imageFileObject: FileObject) => {
     try {
       // Use the new image handler
