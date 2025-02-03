@@ -99,23 +99,37 @@ async function* listBlocks(
       block[block.type].children = children;
     }
 
+    // Process the block before yielding
+    let processedBlock = { ...block };
+
     // Specialized handling for image blocks
     if (block.type === "image") {
       // Fetch remote image and store it locally
       const url = await fetchImage(block.image);
-
-      // notion-rehype-k incorrectly expects "file" to be a string instead of an object
-      yield {
-        ...block,
-        image: {
-          type: block.image.type,
-          [block.image.type]: url,
-          caption: block.image.caption,
-        },
+      processedBlock.image = {
+        type: block.image.type,
+        [block.image.type]: url,
+        caption: block.image.caption,
       };
-    } 
-    // Handle video blocks
+    }
+    // Handle video blocks 
     else if (block.type === "video") {
+      processedBlock.video = {
+        type: block.video.type,
+        [block.video.type]: block.video.type === "external" 
+          ? block.video.external.url 
+          : block.video.file.url,
+        caption: block.video.caption,
+      };
+    }
+
+    // Recursively process any nested content
+    if (processedBlock.type === "column" || processedBlock.type === "column_list") {
+      const children = await awaitAll(listBlocks(client, block.id, fetchImage));
+      processedBlock[processedBlock.type].children = children;
+    }
+
+    yield processedBlock;
       yield {
         ...block,
         video: {
